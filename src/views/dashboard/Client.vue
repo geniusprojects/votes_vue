@@ -62,7 +62,7 @@
         name: 'Client',
         data() {
             return {
-                client: {},
+                client: {'id': 0},
                 notes: []
             }
         },

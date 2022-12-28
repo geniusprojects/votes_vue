@@ -1,13 +1,14 @@
 <template>
-    <div class="container">
-		<div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
+    <!-- Breadcrumb -->
+	<div class="container">
+		<div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
 			<div class="f2-s-1 p-r-30 m-tb-6">
-				<a href="index.html" class="breadcrumb-item f1-s-3 cl9">
+				<a href="/" class="breadcrumb-item f1-s-3 cl9">
 					Home
 				</a>
 
 				<span class="breadcrumb-item f1-s-3 cl9">
-					{{ category.title }}
+					 {{ poll.title }}
 				</span>
 			</div>
 
@@ -20,264 +21,87 @@
 		</div>
 	</div>
 
-	<!-- Page heading -->
-	<div class="container p-t-4 p-b-40">
-		<h2 class="f1-l-1 cl2">
-			{{ category.title }}
-		</h2>
-	</div>
+	<!-- Content -->
+	<section class="bg0 p-b-70 p-t-5">
+		<!-- Title -->
+		<div class="bg-img1 size-a-18 how-overlay1" v-bind:style="'background-image: url('+(poll.main_image ? poll.main_image.path : '/frontend/images/voteps_no_img.png')+');'">
+			<div class="container h-full flex-col-e-c p-b-58">
+				<a href="#" class="f1-s-10 cl0 hov-cl10 trans-03 text-uppercase txt-center m-b-33">
+					Technology
+				</a>
 
-	<!-- Feature post -->
-	<section class="bg0">
-		<div class="container">
-			<div class="row m-rl--1">
-				<div class="col-md-6 p-rl-1 p-b-2" v-for="poll in popular_polls.slice(0, 1)">
-					<div class="bg-img1 size-a-3 how1 pos-relative" v-bind:style="'background-image: url('+(poll.main_image ? poll.main_image.path : '/frontend/images/voteps_no_img.png')+');'">
-						<router-link :class="'dis-block how1-child1 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}"></router-link>
+				<h3 class="f1-l-5 cl0 p-b-16 txt-center respon2">
+					{{ poll.title }}
+				</h3>
 
-						<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-              <router-link :class="'dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2'" :to="{ name: 'Category', params: { id: poll.category.id }}">
-                  {{ poll.category.title }}
-              </router-link>
+				<div class="flex-wr-c-s">
+					<span class="f1-s-3 cl8 m-rl-7 txt-center">
+						<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
+							by John Alvarado
+						</a>
 
-							<h3 class="how1-child2 m-t-14 m-b-10">
-                <router-link :class="'how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
-                    {{ poll.title }}
-                </router-link>
-							</h3>
+						<span class="m-rl-3">|</span>
 
-							<span class="how1-child2">
-                <span class="f1-s-4 cl11">
-                  {{ poll.votes_count }} votes
-                </span>
+						<span>
+							{{ formatDate(poll.created) }}
+						</span>
+					</span>
 
-                <span class="f1-s-3 cl11 m-rl-3">
-                  |
-                </span>
+					<span class="f1-s-3 cl8 m-rl-7 txt-center">
+						{{ poll.votes_count }} Votes
+					</span>
 
-                <span class="f1-s-3 cl11">
-                  {{ formatDate(poll.created) }}
-                </span>
-              </span>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 p-rl-1">
-					<div class="row m-rl--1">
-						<div class="col-sm-6 p-rl-1 p-b-2" v-for="poll in popular_polls.slice(1, 5)">
-							<div class="bg-img1 size-a-14 how1 pos-relative" v-bind:style="'background-image: url('+(poll.main_image ? poll.main_image.path : '/frontend/images/voteps_no_img.png')+');'">
-								<router-link :class="'dis-block how1-child1 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}"></router-link>
-
-								<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-                  <router-link :class="'dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2'" :to="{ name: 'Category', params: { id: poll.category.id }}">
-                      {{ poll.category.title }}
-                  </router-link>
-
-									<h3 class="how1-child2 m-t-14">
-                    <router-link :class="'how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
-                        {{ poll.title }}
-                    </router-link>
-									</h3>
-                  <span class="how1-child2">
-                    <span class="f1-s-4 cl11">
-                      {{ poll.votes_count }} votes
-                    </span>
-
-                    <span class="f1-s-3 cl11 m-rl-3">
-                      |
-                    </span>
-
-                    <span class="f1-s-3 cl11">
-                      {{ formatDate(poll.created) }}
-                    </span>
-                  </span>
-								</div>
-							</div>
-						</div>
-
-					</div>
+					<a href="" class="f1-s-3 cl8 m-rl-7 txt-center hov-cl10 trans-03">
+						0 Comment
+					</a>
 				</div>
 			</div>
 		</div>
-	</section>
 
-	<!-- Post -->
-	<section class="bg0 p-t-70 p-b-55">
-		<div class="container">
+		<!-- Detail -->
+		<div class="container p-t-82">
 			<div class="row justify-content-center">
-				<div class="col-md-10 col-lg-8 p-b-80">
-					<div class="row">
-
-						<div class="col-sm-6 p-r-25 p-r-15-sr991" v-for="poll in polls">
-							<!-- Item latest -->
-							<div class="m-b-45">
-                <router-link :class="'wrap-pic-w hov1 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
-                    <img v-bind:src="poll.main_image ? poll.main_image.path : '/frontend/images/voteps_no_img.png'" alt="IMG">
-                </router-link>
-
-								<div class="p-t-16">
-									<h5 class="p-b-5">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-											{{ poll.title }}
-										</a>
-									</h5>
-
-									<span class="cl8">
-                    <router-link :class="'f1-s-4 cl8 hov-cl10 trans-03'" :to="{ name: 'Category', params: { id: poll.category.id }}">
-                        {{ poll.category.title }}
-                    </router-link>
-
-										<span class="f1-s-3 m-rl-3">
-											|
-										</span>
-
-										<span class="f1-s-3">
-											{{ formatDate(poll.created) }}
-										</span>
-									</span>
-								</div>
-							</div>
+				<div class="col-md-10 col-lg-8 p-b-100">
+					<div class="p-r-10 p-r-0-sr991">
+						<!-- Blog Detail -->
+						<div class="p-b-70">
+							{{ poll.description }}
 						</div>
-					</div>
 
-					<!-- Pagination -->
-					<div class="flex-wr-s-c m-rl--7 p-t-15">
-						<a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">1</a>
-						<a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">2</a>
-					</div>
-				</div>
+						<!-- Leave a comment -->
+						<div>
+							<h4 class="f1-l-4 cl3 p-b-12">
+								Leave a Comment
+							</h4>
 
-				<div class="col-md-10 col-lg-4 p-b-80">
-					<div class="p-l-10 p-rl-0-sr991">
-						<!-- Subscribe -->
-						<div class="bg10 p-rl-35 p-t-28 p-b-35 m-b-50">
-							<h5 class="f1-m-5 cl0 p-b-10">
-								Subscribe
-							</h5>
-
-							<p class="f1-s-1 cl0 p-b-25">
-								Get all latest content delivered to your email a few times a month.
+							<p class="f1-s-13 cl8 p-b-40">
+								Your email address will not be published. Required fields are marked *
 							</p>
 
-							<form class="size-a-9 pos-relative">
-								<input class="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email" placeholder="Email">
+							<form>
+								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Comment..."></textarea>
 
-								<button class="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
-									<i class="fa fa-arrow-right"></i>
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Name*">
+
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
+
+								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Website">
+
+								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
+									Post Comment
 								</button>
 							</form>
 						</div>
+					</div>
+				</div>
 
-						<!-- Most Popular -->
-						<div class="p-b-23">
-							<div class="how2 how2-cl4 flex-s-c">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Most Popular
-								</h3>
-							</div>
-
-							<ul class="p-t-35">
-								<li class="flex-wr-sb-s p-b-22">
-									<div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-										1
-									</div>
-
-									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit
-									</a>
-								</li>
-
-								<li class="flex-wr-sb-s p-b-22">
-									<div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-										2
-									</div>
-
-									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-										Proin velit consectetur non neque
-									</a>
-								</li>
-
-								<li class="flex-wr-sb-s p-b-22">
-									<div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-										3
-									</div>
-
-									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-										Nunc vestibulum, enim vitae condimentum volutpat lobortis ante
-									</a>
-								</li>
-
-								<li class="flex-wr-sb-s p-b-22">
-									<div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-										4
-									</div>
-
-									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-										Proin velit justo consectetur non neque elementum
-									</a>
-								</li>
-
-								<li class="flex-wr-sb-s p-b-22">
-									<div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0">
-										5
-									</div>
-
-									<a href="#" class="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-										Proin velit consectetur non neque
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<!--  -->
-						<div class="flex-c-s p-b-50">
+				<div class="col-md-10 col-lg-4 p-b-100">
+					<div class="p-l-10 p-rl-0-sr991">
+						<!-- Banner -->
+						<div class="flex-c-s">
 							<a href="#">
 								<img class="max-w-full" src="images/banner-02.jpg" alt="IMG">
 							</a>
-						</div>
-
-						<!-- Tag -->
-						<div>
-							<div class="how2 how2-cl4 flex-s-c m-b-30">
-								<h3 class="f1-m-2 cl3 tab01-title">
-									Tags
-								</h3>
-							</div>
-
-							<div class="flex-wr-s-s m-rl--5">
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Fashion
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Denim
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Streetstyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Crafts
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Magazine
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									News
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Blogs
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -290,23 +114,23 @@
     import axios from 'axios'
     import Moment from 'moment'
     export default {
-        name: 'Category',
+        name: 'Poll',
         data() {
             return {
-                category: {},
-                polls: [],
-                popular_polls: [],
-                showNextButton: false,
-                showPreviousButton: false,
-                currentPage: 1,
+                poll: {},
                 query: '',
-                num_polls: 0
             }
         },
-        mounted() {
-            this.getCategory(),
-            this.getPolls(),
-            this.getPopularPolls()
+        // mounted() {
+        //     this.getPoll()
+        // },
+        watch: {
+          '$route.params.id': {
+            immediate: true,
+            handler() {
+              this.getPoll()
+            },
+          },
         },
         methods: {
             formatDate(dateString) {
@@ -314,61 +138,13 @@
                     // Then specify how you want your dates to be formatted
                 return Moment(date).format("MMM DD, YYYY");
             },
-            goToNextPage() {
-                this.currentPage += 1
-                this.getPolls()
-            },
-            goToPreviousPage() {
-                this.currentPage -= 1
-                this.getPolls()
-            },
-            async getCategory() {
+            async getPoll() {
                 this.$store.commit('setIsLoading', true)
-                const categoryID = this.$route.params.id
+                const pollUID = this.$route.params.id
                 await axios
-                    .get(`/api/v1/categories/${categoryID}/`)
+                    .get(`/api/v1/polls/${pollUID}/`)
                     .then(response => {
-                        this.category = response.data
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-                this.$store.commit('setIsLoading', false)
-            },
-            async getPolls() {
-                this.$store.commit('setIsLoading', true)
-                this.showNextButton = false
-                this.showPreviousButton = false
-                const categoryID = this.$route.params.id
-                await axios
-                    .get(`/api/v1/categories/${categoryID}/polls/`)
-                    .then(response => {
-                        this.polls = response.data
-                        this.num_polls = response.data.count
-                    })
-                await axios
-                    .get(`/api/v1/categories/${categoryID}/?page=${this.currentPage}&search=${this.query}`)
-                    .then(response => {
-                        this.leads = response.data.results
-                        if (response.data.next) {
-                            this.showNextButton = true
-                        }
-                        if (response.data.previous) {
-                            this.showPreviousButton = true
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-                this.$store.commit('setIsLoading', false)
-            },
-            async getPopularPolls() {
-                this.$store.commit('setIsLoading', true)
-                const categoryID = this.$route.params.id
-                await axios
-                    .get(`/api/v1/categories/${categoryID}/polls/popular/`)
-                    .then(response => {
-                        this.popular_polls = response.data
+                        this.poll = response.data
                     })
                     .catch(error => {
                         console.log(error)

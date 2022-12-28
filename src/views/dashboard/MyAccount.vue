@@ -31,7 +31,7 @@
                     .catch(error => {
                         console.log(JSON.stringify(error))
                     })
-                
+
                 axios.defaults.headers.common['Authorization'] = ''
                 localStorage.removeItem('token')
                 localStorage.removeItem('username')

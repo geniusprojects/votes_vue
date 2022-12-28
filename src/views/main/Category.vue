@@ -7,7 +7,7 @@
 				</a>
 
 				<span class="breadcrumb-item f1-s-3 cl9">
-					{{ group.title }}
+					{{ category.title }}
 				</span>
 			</div>
 
@@ -23,7 +23,7 @@
 	<!-- Page heading -->
 	<div class="container p-t-4 p-b-40">
 		<h2 class="f1-l-1 cl2">
-			{{ group.title }}
+			{{ category.title }}
 		</h2>
 	</div>
 
@@ -32,13 +32,13 @@
 		<div class="container">
 			<div class="row m-rl--1">
 				<div class="col-md-6 p-rl-1 p-b-2" v-for="poll in popular_polls.slice(0, 1)">
-					<div class="bg-img1 size-a-3 how1 pos-relative" v-bind:style="'background-image: url('+(poll.main_image ? poll.main_image.path : '')+');'">
+					<div class="bg-img1 size-a-3 how1 pos-relative" v-bind:style="'background-image: url('+(poll.main_image ? poll.main_image.path : '/frontend/images/voteps_no_img.png')+');'">
 						<router-link :class="'dis-block how1-child1 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}"></router-link>
 
 						<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-							<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-								{{ poll.category.title }}
-							</a>
+              <router-link :class="'dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2'" :to="{ name: 'Category', params: { id: poll.category.id }}">
+                  {{ poll.category.title }}
+              </router-link>
 
 							<h3 class="how1-child2 m-t-14 m-b-10">
                 <router-link :class="'how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
@@ -66,13 +66,13 @@
 				<div class="col-md-6 p-rl-1">
 					<div class="row m-rl--1">
 						<div class="col-sm-6 p-rl-1 p-b-2" v-for="poll in popular_polls.slice(1, 5)">
-							<div class="bg-img1 size-a-14 how1 pos-relative" v-bind:style="'background-image: url('+(poll.main_image ? poll.main_image.path : '')+');'">
+							<div class="bg-img1 size-a-14 how1 pos-relative" v-bind:style="'background-image: url('+(poll.main_image ? poll.main_image.path : '/frontend/images/voteps_no_img.png')+');'">
 								<router-link :class="'dis-block how1-child1 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}"></router-link>
 
 								<div class="flex-col-e-s s-full p-rl-25 p-tb-20">
-									<a href="#" class="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-										{{ poll.category.title }}
-									</a>
+                  <router-link :class="'dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2'" :to="{ name: 'Category', params: { id: poll.category.id }}">
+                      {{ poll.category.title }}
+                  </router-link>
 
 									<h3 class="how1-child2 m-t-14">
                     <router-link :class="'how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
@@ -113,20 +113,20 @@
 							<!-- Item latest -->
 							<div class="m-b-45">
                 <router-link :class="'wrap-pic-w hov1 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
-                    <img v-bind:src="poll.main_image ? poll.main_image.path : ''" alt="IMG">
+                    <img v-bind:src="poll.main_image ? poll.main_image.path : '/frontend/images/voteps_no_img.png'" alt="IMG">
                 </router-link>
 
 								<div class="p-t-16">
 									<h5 class="p-b-5">
-										<a href="blog-detail-01.html" class="f1-m-3 cl2 hov-cl10 trans-03">
-											{{ poll.title }}
-										</a>
+                    <router-link :class="'f1-m-3 cl2 hov-cl10 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
+                        {{ poll.title }}
+                    </router-link>
 									</h5>
 
 									<span class="cl8">
-										<a href="#" class="f1-s-4 cl8 hov-cl10 trans-03">
-											{{ poll.category.title }}
-										</a>
+                    <router-link :class="'f1-s-4 cl8 hov-cl10 trans-03'" :to="{ name: 'Category', params: { id: poll.category.id }}">
+                        {{ poll.category.title }}
+                    </router-link>
 
 										<span class="f1-s-3 m-rl-3">
 											|
@@ -290,10 +290,10 @@
     import axios from 'axios'
     import Moment from 'moment'
     export default {
-        name: 'Group',
+        name: 'Category',
         data() {
             return {
-                group: {},
+                category: {},
                 polls: [],
                 popular_polls: [],
                 showNextButton: false,
@@ -304,7 +304,7 @@
             }
         },
         mounted() {
-            this.getGroup(),
+            this.getCategory(),
             this.getPolls(),
             this.getPopularPolls()
         },
@@ -322,13 +322,13 @@
                 this.currentPage -= 1
                 this.getPolls()
             },
-            async getGroup() {
+            async getCategory() {
                 this.$store.commit('setIsLoading', true)
-                const groupID = this.$route.params.id
+                const categoryID = this.$route.params.id
                 await axios
-                    .get(`/api/v1/groups/${groupID}/`)
+                    .get(`/api/v1/categories/${categoryID}/`)
                     .then(response => {
-                        this.group = response.data
+                        this.category = response.data
                     })
                     .catch(error => {
                         console.log(error)
@@ -339,15 +339,15 @@
                 this.$store.commit('setIsLoading', true)
                 this.showNextButton = false
                 this.showPreviousButton = false
-                const groupID = this.$route.params.id
+                const categoryID = this.$route.params.id
                 await axios
-                    .get(`/api/v1/groups/${groupID}/polls/`)
+                    .get(`/api/v1/categories/${categoryID}/polls/`)
                     .then(response => {
                         this.polls = response.data
                         this.num_polls = response.data.count
                     })
                 await axios
-                    .get(`/api/v1/groups/${groupID}/?page=${this.currentPage}&search=${this.query}`)
+                    .get(`/api/v1/categories/${categoryID}/?page=${this.currentPage}&search=${this.query}`)
                     .then(response => {
                         this.leads = response.data.results
                         if (response.data.next) {
@@ -364,9 +364,9 @@
             },
             async getPopularPolls() {
                 this.$store.commit('setIsLoading', true)
-                const groupID = this.$route.params.id
+                const categoryID = this.$route.params.id
                 await axios
-                    .get(`/api/v1/groups/${groupID}/polls/popular/`)
+                    .get(`/api/v1/categories/${categoryID}/polls/popular/`)
                     .then(response => {
                         this.popular_polls = response.data
                     })

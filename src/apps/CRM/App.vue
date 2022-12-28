@@ -28,14 +28,14 @@
                 axios.defaults.headers.common['Authorization'] = ""
             }
             if (!this.$store.state.team.id || this.$store.state.team.id == 'undefined') {
-                this.$router.push('/dashboard/add-team')
+                this.$router.push('/crm/dashboard/add-team')
             }
         },
     }
 </script>
 
 <style lang="scss">
-  @import '../node_modules/bulma';
+  @import '../../../node_modules/bulma';
 
   .lds-dual-ring {
       display: inline-block;

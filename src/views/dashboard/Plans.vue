@@ -4,40 +4,15 @@
             <div class="column is-12">
                 <h1 class="title">Plans</h1>
             </div>
-
-            <div class="column is-4">
+            <div v-for="plan in plans" v-bind:key="plan.id" class="column is-4">
                 <div class="box">
-                    <h2 class="subtitle">Free</h2>
-                    <h4 class="is-size-3">$0</h4>
+                    <h2 class="subtitle">{{ plan.name }}</h2>
+                    <h4 class="is-size-3">${{ plan.price }}</h4>
 
-                    <p>Max 5 clients</p>
-                    <p>Max 5 leads</p>
+                    <p>Max {{ plan.max_clients }} clients</p>
+                    <p>Max {{ plan.max_leads }} leads</p>
 
-                    <button @click="subscribe('free')" class="button is-primary">Subscribe</button>
-                </div>
-            </div>
-
-            <div class="column is-4">
-                <div class="box">
-                    <h2 class="subtitle">Small team</h2>
-                    <h4 class="is-size-3">$10</h4>
-
-                    <p>Max 15 clients</p>
-                    <p>Max 15 leads</p>
-
-                    <button @click="subscribe('smallteam')" class="button is-primary">Subscribe</button>
-                </div>
-            </div>
-
-            <div class="column is-4">
-                <div class="box">
-                    <h2 class="subtitle">Big team</h2>
-                    <h4 class="is-size-3">$25</h4>
-
-                    <p>Max 50 clients</p>
-                    <p>Max 50 leads</p>
-
-                    <button @click="subscribe('bigteam')" class="button is-primary">Subscribe</button>
+                    <button @click="subscribe(plan.id)" class="button is-primary">Subscribe</button>
                 </div>
             </div>
 
@@ -59,16 +34,31 @@ export default {
     name: 'Plans',
     data() {
         return {
+            plans: [],
             pub_key: '',
             stripe: null
         }
     },
     async mounted() {
         await this.getPubKey()
-        
+        await this.getPlans()
+
         this.stripe = Stripe(this.pub_key)
     },
     methods: {
+        async getPlans() {
+            this.$store.commit('setIsLoading', true)
+            await axios
+                .get(`/api/v1/plans/`)
+                .then(response => {
+                    console.log(response.data)
+                    this.plans = response.data
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            this.$store.commit('setIsLoading', false)
+        },
         async getPubKey() {
             this.$store.commit('setIsLoading', true)
 
@@ -122,14 +112,15 @@ export default {
                 .post('/api/v1/stripe/create_checkout_session/', data)
                 .then(response => {
                     console.log(response)
-
-                    return this.stripe.redirectToCheckout({sessionId: response.data.sessionId})
+                    if('sessionId' in response.data){
+                      return this.stripe.redirectToCheckout({sessionId: response.data.sessionId})
+                    }
                 })
                 .catch(error => {
                     console.log('Error:', error)
                 })
 
-            /*await axios
+            await axios
                 .post(`/api/v1/teams/upgrade_plan/`, data)
                 .then(response => {
                     console.log('Upgraded plan')
@@ -157,7 +148,7 @@ export default {
                 })
                 .catch(error => {
                     console.log(error)
-                })*/
+                })
 
             this.$store.commit('setIsLoading', false)
         }

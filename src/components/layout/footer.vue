@@ -1,121 +1,213 @@
 <template>
-    <!-- Header -->
-	<header>
-		<!-- Header desktop -->
-		<div class="container-menu-desktop">
-      <MainMenu />
+    <!-- Footer -->
+	<footer>
+		<div class="bg2 p-t-40 p-b-25">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 p-b-20">
+						<div class="size-h-3 flex-s-c">
+							<a href="index.html">
+								<img class="max-s-full" src="images/icons/logo-02.png" alt="LOGO">
+							</a>
+						</div>
 
-			<!--  -->
-			<div class="wrap-logo container no-banner">
-				<!-- Logo desktop -->
-				<div class="logo">
-					<a href="index.html"><img src="images/icons/logo-01.png" alt="LOGO"></a>
-				</div>
+						<div>
+							<p class="f1-s-1 cl11 p-b-16">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor magna eget elit efficitur, at accumsan sem placerat. Nulla tellus libero, mattis nec molestie at, facilisis ut turpis. Vestibulum dolor metus, tincidunt eget odio
+							</p>
 
-				<!-- Banner -->
-<!--				<div class="banner-header">-->
-<!--					<a href="https://themewagon.com/themes/free-bootstrap-4-html5-news-website-template-magnews2/"><img src="images/banner-01.jpg" alt="IMG"></a>-->
-<!--				</div>-->
-			</div>
+							<p class="f1-s-1 cl11 p-b-16">
+								Any questions? Call us on (+1) 96 716 6879
+							</p>
 
-			<!--  -->
-			<div class="wrap-main-nav">
-				<div class="main-nav">
-					<!-- Menu desktop -->
-					<nav class="menu-desktop">
-						<a class="logo-stick" href="index.html">
-							<img src="images/icons/logo-01.png" alt="LOGO">
-						</a>
+							<div class="p-t-15">
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-facebook-f"></span>
+								</a>
 
-						<ul class="main-menu justify-content-center">
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-twitter"></span>
+								</a>
 
-							<li class="mega-menu-item" v-for="group in groups" v-bind:key="group.id">
-								<a href="category-01.html">{{ group.title }}</a>
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-pinterest-p"></span>
+								</a>
 
-								<div class="sub-mega-menu">
-									<div class="nav flex-column nav-pills" role="tablist">
-										<a class="nav-link" data-toggle="pill" role="tab" v-for="category in group.categories" v-bind:href="'#news-'+category.id">{{ category.title }}</a>
-									</div>
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-vimeo-v"></span>
+								</a>
 
-									<div class="tab-content">
-										<div class="tab-pane" role="tabpanel" v-for="category in group.categories" v-bind:id="'news-'+category.id" v-bind:key="category.id">
-											<div class="row">
-												<div class="col-3" v-for="poll in category.polls">
-													<!-- Item post -->
-													<div>
-                            <router-link :class="'wrap-pic-w hov1 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
-                                <img v-for="image in poll.main_image" v-bind:src="image.path" alt="IMG">
-                            </router-link>
-														<div class="p-t-10">
-															<h5 class="p-b-5">
-                                <router-link :class="'1-s-5 cl3 hov-cl10 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
-                                    {{ poll.title }}
-                                </router-link>
-															</h5>
+								<a href="#" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-youtube"></span>
+								</a>
+							</div>
+						</div>
+					</div>
 
-															<span class="cl8">
-																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-																	Music
-																</a>
+					<div class="col-sm-6 col-lg-4 p-b-20">
+						<div class="size-h-3 flex-s-c">
+							<h5 class="f1-m-7 cl0">
+								Popular Posts
+							</h5>
+						</div>
 
-																<span class="f1-s-3 m-rl-3">
-																	-
-																</span>
+						<ul>
+							<li class="flex-wr-sb-s p-b-20">
+								<a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
+									<img src="images/popular-post-01.jpg" alt="IMG">
+								</a>
 
-																<span class="f1-s-3">
-																	Feb 18
-																</span>
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+								<div class="size-w-5">
+									<h6 class="p-b-5">
+										<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
+											Donec metus orci, malesuada et lectus vitae
+										</a>
+									</h6>
 
-									</div>
+									<span class="f1-s-3 cl6">
+										Feb 17
+									</span>
 								</div>
 							</li>
 
+							<li class="flex-wr-sb-s p-b-20">
+								<a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
+									<img src="images/popular-post-02.jpg" alt="IMG">
+								</a>
+
+								<div class="size-w-5">
+									<h6 class="p-b-5">
+										<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
+											Lorem ipsum dolor sit amet, consectetur
+										</a>
+									</h6>
+
+									<span class="f1-s-3 cl6">
+										Feb 16
+									</span>
+								</div>
+							</li>
+
+							<li class="flex-wr-sb-s p-b-20">
+								<a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
+									<img src="images/popular-post-03.jpg" alt="IMG">
+								</a>
+
+								<div class="size-w-5">
+									<h6 class="p-b-5">
+										<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
+											Suspendisse dictum enim quis imperdiet auctor
+										</a>
+									</h6>
+
+									<span class="f1-s-3 cl6">
+										Feb 15
+									</span>
+								</div>
+							</li>
 						</ul>
-					</nav>
+					</div>
+
+					<div class="col-sm-6 col-lg-4 p-b-20">
+						<div class="size-h-3 flex-s-c">
+							<h5 class="f1-m-7 cl0">
+								Category
+							</h5>
+						</div>
+
+						<ul class="m-t--12">
+							<li class="how-bor1 p-rl-5 p-tb-10">
+								<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+									Fashion (22)
+								</a>
+							</li>
+
+							<li class="how-bor1 p-rl-5 p-tb-10">
+								<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+									Technology (29)
+								</a>
+							</li>
+
+							<li class="how-bor1 p-rl-5 p-tb-10">
+								<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+									Street Style (15)
+								</a>
+							</li>
+
+							<li class="how-bor1 p-rl-5 p-tb-10">
+								<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+									Life Style (28)
+								</a>
+							</li>
+
+							<li class="how-bor1 p-rl-5 p-tb-10">
+								<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+									DIY & Crafts (16)
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-	</header>
+
+		<div class="bg11">
+			<div class="container size-h-4 flex-c-c p-tb-15">
+				<span class="f1-s-1 cl0 txt-center">
+					Copyright © 2018
+				</span>
+			</div>
+		</div>
+	</footer>
+
+  <!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<span class="fas fa-angle-up"></span>
+		</span>
+	</div>
+
+	<!-- Modal Video 01-->
+	<div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document" data-dismiss="modal">
+			<div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
+
+			<div class="wrap-video-mo-01">
+				<div class="video-mo-01">
+					</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-    import MainMenu from "@/components/layout/mainmenu.vue";
     import axios from "axios";
     export default {
-        name: 'Header',
-        components: {
-          MainMenu
-        },
-        data() {
-            return {
-                groups: {
-                    categories: [],
-                }
-            }
-        },
-        mounted() {
-            this.getGroup()
-        },
-        methods: {
-            async getGroup() {
-                this.$store.commit('setIsLoading', true)
-                await axios
-                    .get('/api/v1/groups/')
-                    .then(response => {
-                        this.groups = response.data
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-
-                this.$store.commit('setIsLoading', false)
-            }
-        }
+        name: 'Footer',
+        // data() {
+        //     return {
+        //         groups: {
+        //             categories: [],
+        //         }
+        //     }
+        // },
+        // mounted() {
+        //     this.getGroup()
+        // },
+        // methods: {
+        //     async getGroup() {
+        //         this.$store.commit('setIsLoading', true)
+        //         await axios
+        //             .get('/api/v1/groups/')
+        //             .then(response => {
+        //                 this.groups = response.data
+        //             })
+        //             .catch(error => {
+        //                 console.log(error)
+        //             })
+        //
+        //         this.$store.commit('setIsLoading', false)
+        //     }
+        // }
     }
 </script>
