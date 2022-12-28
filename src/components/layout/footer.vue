@@ -1,0 +1,121 @@
+<template>
+    <!-- Header -->
+	<header>
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+      <MainMenu />
+
+			<!--  -->
+			<div class="wrap-logo container no-banner">
+				<!-- Logo desktop -->
+				<div class="logo">
+					<a href="index.html"><img src="images/icons/logo-01.png" alt="LOGO"></a>
+				</div>
+
+				<!-- Banner -->
+<!--				<div class="banner-header">-->
+<!--					<a href="https://themewagon.com/themes/free-bootstrap-4-html5-news-website-template-magnews2/"><img src="images/banner-01.jpg" alt="IMG"></a>-->
+<!--				</div>-->
+			</div>
+
+			<!--  -->
+			<div class="wrap-main-nav">
+				<div class="main-nav">
+					<!-- Menu desktop -->
+					<nav class="menu-desktop">
+						<a class="logo-stick" href="index.html">
+							<img src="images/icons/logo-01.png" alt="LOGO">
+						</a>
+
+						<ul class="main-menu justify-content-center">
+
+							<li class="mega-menu-item" v-for="group in groups" v-bind:key="group.id">
+								<a href="category-01.html">{{ group.title }}</a>
+
+								<div class="sub-mega-menu">
+									<div class="nav flex-column nav-pills" role="tablist">
+										<a class="nav-link" data-toggle="pill" role="tab" v-for="category in group.categories" v-bind:href="'#news-'+category.id">{{ category.title }}</a>
+									</div>
+
+									<div class="tab-content">
+										<div class="tab-pane" role="tabpanel" v-for="category in group.categories" v-bind:id="'news-'+category.id" v-bind:key="category.id">
+											<div class="row">
+												<div class="col-3" v-for="poll in category.polls">
+													<!-- Item post -->
+													<div>
+                            <router-link :class="'wrap-pic-w hov1 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
+                                <img v-for="image in poll.main_image" v-bind:src="image.path" alt="IMG">
+                            </router-link>
+														<div class="p-t-10">
+															<h5 class="p-b-5">
+                                <router-link :class="'1-s-5 cl3 hov-cl10 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">
+                                    {{ poll.title }}
+                                </router-link>
+															</h5>
+
+															<span class="cl8">
+																<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
+																	Music
+																</a>
+
+																<span class="f1-s-3 m-rl-3">
+																	-
+																</span>
+
+																<span class="f1-s-3">
+																	Feb 18
+																</span>
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</li>
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+</template>
+
+<script>
+    import MainMenu from "@/components/layout/mainmenu.vue";
+    import axios from "axios";
+    export default {
+        name: 'Header',
+        components: {
+          MainMenu
+        },
+        data() {
+            return {
+                groups: {
+                    categories: [],
+                }
+            }
+        },
+        mounted() {
+            this.getGroup()
+        },
+        methods: {
+            async getGroup() {
+                this.$store.commit('setIsLoading', true)
+                await axios
+                    .get('/api/v1/groups/')
+                    .then(response => {
+                        this.groups = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+
+                this.$store.commit('setIsLoading', false)
+            }
+        }
+    }
+</script>
