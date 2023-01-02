@@ -476,7 +476,8 @@ export default {
   mounted() {
       this.getGroup(),
       this.getLatestPolls(),
-      this.getPopularPolls()
+      this.getPopularPolls(),
+      document.title = 'new title'
   },
   methods: {
       formatDate(dateString) {
