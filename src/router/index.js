@@ -6,9 +6,11 @@ import HomeView from '../views/HomeView.vue'
 import Group from '../views/main/Group.vue'
 import Category from '../views/main/Category.vue'
 import Poll from '../views/main/Poll.vue'
+import LogIn from '../views/main/LogIn.vue'
 
 import SignUp from '../views/SignUp.vue'
-import LogIn from '../views/LogIn.vue'
+import CRMSignUp from '../views/SignUp.vue'
+import CRMLogIn from '../views/LogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import MyAccount from '../views/dashboard/MyAccount.vue'
 import Leads from '../views/dashboard/Leads.vue'
@@ -56,11 +58,21 @@ const routes = [
   },
   {
     path: '/crm/sign-up',
+    name: 'CRMSignUp',
+    component: CRMSignUp
+  },
+  {
+    path: '/crm/log-in',
+    name: 'CRMLogIn',
+    component: CRMLogIn
+  },
+  {
+    path: '/signup',
     name: 'SignUp',
     component: SignUp
   },
   {
-    path: '/crm/log-in',
+    path: '/login',
     name: 'LogIn',
     component: LogIn
   },
@@ -228,7 +240,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireLogin) && !store.state.isAuthenticated) {
-    next('/log-in')
+    next('/login')
   } else {
     next()
   }

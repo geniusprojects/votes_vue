@@ -26,9 +26,9 @@
 							Sing up
 						</a>
 
-						<a href="#" class="left-topbar-item">
-							Log in
-						</a>
+            <router-link :class="'left-topbar-item'" :to="{ name: 'LogIn',}">
+                Log in
+            </router-link>
 					</div>
 
 					<div class="right-topbar">
