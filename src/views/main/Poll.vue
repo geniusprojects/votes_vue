@@ -69,14 +69,25 @@
 						</div>
 
 						<!-- Leave a comment -->
-						<div>
+						<div v-if="$store.state.isAuthenticated">
 							<h4 class="f1-l-4 cl3 p-b-12">
-								Leave a Comment
+								Choose an Option
 							</h4>
 
 							<p class="f1-s-13 cl8 p-b-40">
 								Your email address will not be published. Required fields are marked *
 							</p>
+
+              <div class="form-check" v-for="choice in choices">
+                <input class="form-check-input" type="radio"
+                       name="choiceSelect"
+                       v-bind:value="choice.uid"
+                       v-bind:id="choice.uid"
+                       v-model="choiceSelected">
+
+                <label class="form-check-label" v-bind:for="choice.uid">{{ choice.choice_text }}</label>
+              </div>
+
 
 							<form>
 								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Comment..."></textarea>
@@ -92,6 +103,11 @@
 								</button>
 							</form>
 						</div>
+            <div v-else>
+              <p class="f1-s-13 cl8 p-b-40">
+                You must be <router-link :to="{ name: 'LogIn',}">logged</router-link> in to be able to vote.
+							</p>
+            </div>
 					</div>
 				</div>
 
@@ -110,6 +126,28 @@
 	</section>
 </template>
 
+<style>
+  .form-check{
+    border: 1px #9e9e9e solid;
+    border-radius: 10px;
+  }
+  .form-check:hover{
+    border-color: #6c757d;
+  }
+  .form-check:active{
+    border-color: #333333;
+  }
+  .form-check-input{
+    display: none;
+  }
+  .form-check-label{
+    border-radius: 10px;
+  }
+  .form-check-input:checked + label{
+    background-color: rgba(5, 62, 0, 0.05);
+  }
+</style>
+
 <script>
     import axios from 'axios'
     import Moment from 'moment'
@@ -118,6 +156,7 @@
         data() {
             return {
                 poll: {},
+                choices: [],
                 query: '',
             }
         },
@@ -128,7 +167,8 @@
           '$route.params.id': {
             immediate: true,
             handler() {
-              this.getPoll()
+              this.getPoll();
+              this.getChoices();
             },
           },
         },
@@ -145,6 +185,19 @@
                     .get(`/api/v1/polls/${pollUID}/`)
                     .then(response => {
                         this.poll = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.$store.commit('setIsLoading', false)
+            },
+            async getChoices() {
+                this.$store.commit('setIsLoading', true)
+                const pollUID = this.$route.params.id
+                await axios
+                    .get(`/api/v1/polls/${pollUID}/choices/`)
+                    .then(response => {
+                        this.choices = response.data
                     })
                     .catch(error => {
                         console.log(error)

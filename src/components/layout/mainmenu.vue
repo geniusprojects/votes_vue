@@ -14,21 +14,16 @@
 							</span>
 						</span>
 
-						<a href="#" class="left-topbar-item">
-							About
-						</a>
+						<router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'SignUp',}">
+                Sign Up
+            </router-link>
 
-						<a href="#" class="left-topbar-item">
-							Contact
-						</a>
-
-						<a href="#" class="left-topbar-item">
-							Sing up
-						</a>
-
-            <router-link :class="'left-topbar-item'" :to="{ name: 'LogIn',}">
+            <router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'LogIn',}">
                 Log in
             </router-link>
+            <button v-else :class="'left-topbar-item'" @click="logout()">
+                Log out
+            </button>
 					</div>
 
 					<div class="right-topbar">
@@ -189,7 +184,31 @@
 </template>
 
 <script>
+    import axios from "axios";
+
     export default {
-        name: 'MainMenu'
+        name: 'MainMenu',
+        methods: {
+            async logout() {
+                await axios
+                    .post('/api/v1/token/logout/')
+                    .then(response => {
+                        console.log('Logged out')
+                    })
+                    .catch(error => {
+                        console.log(JSON.stringify(error))
+                    })
+
+                axios.defaults.headers.common['Authorization'] = ''
+                localStorage.removeItem('token')
+                localStorage.removeItem('username')
+                localStorage.removeItem('userid')
+                localStorage.removeItem('team_name')
+                localStorage.removeItem('team_id')
+                this.$store.commit('removeToken')
+
+                this.$router.push('/')
+            }
+        }
     }
 </script>
