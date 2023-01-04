@@ -68,38 +68,38 @@
 							{{ poll.description }}
 						</div>
 
+            <div class="progress">
+              <div class="progress-bar" v-for="choice in choices" role="progressbar" v-bind:style="'width:' +choice.progress+'%; background-color: '+choice.color" v-bind:aria-valuenow="choice.progress" aria-valuemin="0" aria-valuemax="100">{{ choice.choice_text }}</div>
+            </div>
+
 						<!-- Leave a comment -->
 						<div v-if="$store.state.isAuthenticated">
 							<h4 class="f1-l-4 cl3 p-b-12">
 								Choose an Option
 							</h4>
 
-							<p class="f1-s-13 cl8 p-b-40">
+							<!--<p class="f1-s-13 cl8 p-b-40">
 								Your email address will not be published. Required fields are marked *
-							</p>
+							</p>-->
 
               <div class="form-check" v-for="choice in choices">
                 <input class="form-check-input" type="radio"
                        name="choiceSelect"
-                       v-bind:value="choice.uid"
+                       v-bind:value="{ 'id': choice.id, 'uid': choice.uid }"
                        v-bind:id="choice.uid"
-                       v-model="choiceSelected">
+                       v-model="choiceSelected"
+                       @click="showComment()"
+                >
 
-                <label class="form-check-label" v-bind:for="choice.uid">{{ choice.choice_text }}</label>
+                <label class="form-check-label" v-bind:for="choice.uid" v-bind:style="'border-color:' +choice.color">{{ choice.choice_text }}</label>
               </div>
 
 
-							<form>
-								<textarea class="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg" placeholder="Comment..."></textarea>
+							<form @submit.prevent="postVote">
+								<textarea class="comment bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="comment" v-model="comment" placeholder="Comment..." style="display: none;"></textarea>
 
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name" placeholder="Name*">
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="email" placeholder="Email*">
-
-								<input class="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="website" placeholder="Website">
-
-								<button class="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-									Post Comment
+								<button class="submit size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10" style="display: none;">
+									Vote
 								</button>
 							</form>
 						</div>
@@ -127,6 +127,9 @@
 </template>
 
 <style>
+  .progress{
+    margin-bottom: 30px;
+  }
   .form-check{
     border: 1px #9e9e9e solid;
     border-radius: 10px;
@@ -142,6 +145,9 @@
   }
   .form-check-label{
     border-radius: 10px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
   }
   .form-check-input:checked + label{
     background-color: rgba(5, 62, 0, 0.05);
@@ -158,6 +164,10 @@
                 poll: {},
                 choices: [],
                 query: '',
+                choiceSelected: '',
+                comment: '',
+                votes: [],
+                votes_count: 0,
             }
         },
         // mounted() {
@@ -169,6 +179,7 @@
             handler() {
               this.getPoll();
               this.getChoices();
+              this.getVotes();
             },
           },
         },
@@ -177,6 +188,10 @@
                 const date = new Date(dateString);
                     // Then specify how you want your dates to be formatted
                 return Moment(date).format("MMM DD, YYYY");
+            },
+            showComment(){
+              $('.comment').fadeIn();
+              $('.submit').fadeIn();
             },
             async getPoll() {
                 this.$store.commit('setIsLoading', true)
@@ -197,7 +212,42 @@
                 await axios
                     .get(`/api/v1/polls/${pollUID}/choices/`)
                     .then(response => {
-                        this.choices = response.data
+                        for(let i=0;i<response.data.length;i++){
+                          this.votes_count += response.data[i].votes;
+                        }
+                        for(let i=0;i<response.data.length;i++){
+                          response.data[i]['progress'] = response.data[i].votes / this.votes_count * 100;
+                        }
+                        this.choices = response.data;
+                        console.log(this.choices)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.$store.commit('setIsLoading', false)
+            },
+            async getVotes() {
+                this.$store.commit('setIsLoading', true)
+                const pollUID = this.$route.params.id
+                await axios
+                    .get(`/api/v1/polls/${pollUID}/votes/`)
+                    .then(response => {
+                        this.votes = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.$store.commit('setIsLoading', false)
+            },
+            async postVote() {
+                this.$store.commit('setIsLoading', true)
+                const choice = this.choiceSelected.uid;
+                this.choiceSelected['comment'] = this.comment;
+                await axios
+                    .post(`/api/v1/votes/`, this.choiceSelected)
+                    .then(response => {
+                        $('.comment').fadeOut();
+                        $('.submit').fadeOut();
                     })
                     .catch(error => {
                         console.log(error)
