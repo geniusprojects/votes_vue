@@ -73,7 +73,7 @@
             </div>
 
 						<!-- Leave a comment -->
-						<div v-if="$store.state.isAuthenticated">
+						<div class="choices" v-if="$store.state.isAuthenticated">
 							<h4 class="f1-l-4 cl3 p-b-12">
 								Choose an Option
 							</h4>
@@ -108,6 +108,40 @@
                 You must be <router-link :to="{ name: 'LogIn',}">logged</router-link> in to be able to vote.
 							</p>
             </div>
+            <div class="comments" style="margin-top: 30px;">
+                <h4 class="f1-l-4 cl3 p-b-12">
+                  Comments
+                </h4>
+                <div class="row">
+                    <div class="col-md-12" v-for="vote in votes">
+                        <div class="media g-mb-30 media-comment" v-if="vote.comment">
+                            <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30" v-bind:style="'box-shadow: 0 15px 10px -6px ' + vote.choice.color">
+                              <div class="g-mb-15">
+                                <h5 class="h5 g-color-gray-dark-v1 mb-0">{{ vote.account.first_name }} {{ vote.account.last_name }}</h5>
+                                <span class="g-color-gray-dark-v4 g-font-size-12">{{ formatDateDelta(vote.updated) }}</span>
+                              </div>
+
+                              <p>{{ vote.comment }}</p>
+
+                              <ul class="list-inline d-sm-flex my-0" style="justify-content: flex-end; display: none !important;">
+                                <li class="list-inline-item">
+                                  <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                    <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
+                                    178
+                                  </a>
+                                </li>
+                                <li class="list-inline-item">
+                                  <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                    <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
+                                    34
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 					</div>
 				</div>
 
@@ -130,6 +164,10 @@
   .progress{
     margin-bottom: 30px;
   }
+  .progress-bar{
+    height: 25px;
+    line-height: 25px;
+  }
   .form-check{
     border: 1px #9e9e9e solid;
     border-radius: 10px;
@@ -151,6 +189,47 @@
   }
   .form-check-input:checked + label{
     background-color: rgba(5, 62, 0, 0.05);
+  }
+
+  @media (min-width: 0) {
+      .g-mr-15 {
+          margin-right: 1.07143rem !important;
+      }
+  }
+  @media (min-width: 0){
+      .g-mt-3 {
+          margin-top: 0.21429rem !important;
+      }
+  }
+
+  .g-height-50 {
+      height: 50px;
+  }
+
+  .g-width-50 {
+      width: 50px !important;
+  }
+
+  @media (min-width: 0){
+      .g-pa-30 {
+          padding: 2.14286rem !important;
+      }
+  }
+
+  .g-bg-secondary {
+      background-color: #fafafa !important;
+  }
+
+  .g-color-gray-dark-v4 {
+      color: #777 !important;
+  }
+
+  .g-font-size-12 {
+      font-size: 0.85714rem !important;
+  }
+
+  .media-comment {
+      margin-top:20px
   }
 </style>
 
@@ -189,6 +268,47 @@
                     // Then specify how you want your dates to be formatted
                 return Moment(date).format("MMM DD, YYYY");
             },
+            formatDateDelta(dateString) {
+                const date = Moment(new Date(dateString));//.format("MMM DD, YYYY");
+                const date_now = Moment(new Date());//.format("MMM DD, YYYY");
+                const minutes = date_now.diff(date, 'minutes');
+
+                var text = '';
+                if(minutes < 60){
+                  text = minutes + ' minutes ago';
+                }
+                else{
+                  const hours = date_now.diff(date, 'hours');
+                  if(hours < 24){
+                    text = hours + ' hours ago';
+                  }
+                  else{
+                    const days = date_now.diff(date, 'days');
+                    if(days < 7){
+                      text = days + ' days ago';
+                    }
+                    else{
+                      const weeks = date_now.diff(date, 'weeks');
+                      if(weeks < 4){
+                        text = weeks + ' weeks ago';
+                      }
+                      else{
+                        const months = date_now.diff(date, 'months');
+                        if(months < 12){
+                          text = months + ' months ago';
+                        }
+                        else{
+                          const years = date_now.diff(date, 'years');
+                          if(years > 0){
+                            text = years + ' years ago';
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                return text;
+            },
             showComment(){
               $('.comment').fadeIn();
               $('.submit').fadeIn();
@@ -212,6 +332,7 @@
                 await axios
                     .get(`/api/v1/polls/${pollUID}/choices/`)
                     .then(response => {
+                        this.votes_count = 0;
                         for(let i=0;i<response.data.length;i++){
                           this.votes_count += response.data[i].votes;
                         }
@@ -219,7 +340,6 @@
                           response.data[i]['progress'] = response.data[i].votes / this.votes_count * 100;
                         }
                         this.choices = response.data;
-                        console.log(this.choices)
                     })
                     .catch(error => {
                         console.log(error)
@@ -248,6 +368,9 @@
                     .then(response => {
                         $('.comment').fadeOut();
                         $('.submit').fadeOut();
+                        $('.choices').fadeOut();
+                        this.getChoices();
+                        this.getVotes();
                     })
                     .catch(error => {
                         console.log(error)
