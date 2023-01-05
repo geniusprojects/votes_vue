@@ -68,12 +68,12 @@
 							{{ poll.description }}
 						</div>
 
-            <div class="progress">
+            <div class="progress" v-if="votes_count">
               <div class="progress-bar" v-for="choice in choices" role="progressbar" v-bind:style="'width:' +choice.progress+'%; background-color: '+choice.color" v-bind:aria-valuenow="choice.progress" aria-valuemin="0" aria-valuemax="100">{{ choice.choice_text }}</div>
             </div>
 
 						<!-- Leave a comment -->
-						<div class="choices" v-if="$store.state.isAuthenticated">
+						<div class="choices" v-if="$store.state.isAuthenticated && !my_vote">
 							<h4 class="f1-l-4 cl3 p-b-12">
 								Choose an Option
 							</h4>
@@ -103,12 +103,17 @@
 								</button>
 							</form>
 						</div>
+            <div v-else-if="$store.state.isAuthenticated && my_vote">
+              <p class="f1-s-13 cl8 p-b-40">
+                You have already voted. Your choice was "<span v-bind:style="'color:' +my_vote.choice.color">{{ my_vote.choice.choice_text }}</span>"
+							</p>
+            </div>
             <div v-else>
               <p class="f1-s-13 cl8 p-b-40">
                 You must be <router-link :to="{ name: 'LogIn',}">logged</router-link> in to be able to vote.
 							</p>
             </div>
-            <div class="comments" style="margin-top: 30px;">
+            <div class="comments" style="margin-top: 30px;" v-if="votes.length > 0">
                 <h4 class="f1-l-4 cl3 p-b-12">
                   Comments
                 </h4>
@@ -246,6 +251,7 @@
                 choiceSelected: '',
                 comment: '',
                 votes: [],
+                my_vote: {},
                 votes_count: 0,
             }
         },
@@ -259,6 +265,7 @@
               this.getPoll();
               this.getChoices();
               this.getVotes();
+              this.getMyVote();
             },
           },
         },
@@ -353,6 +360,19 @@
                     .get(`/api/v1/polls/${pollUID}/votes/`)
                     .then(response => {
                         this.votes = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.$store.commit('setIsLoading', false)
+            },
+            async getMyVote() {
+                this.$store.commit('setIsLoading', true)
+                const pollUID = this.$route.params.id
+                await axios
+                    .get(`/api/v1/polls/${pollUID}/my-vote/`)
+                    .then(response => {
+                        this.my_vote = response.data
                     })
                     .catch(error => {
                         console.log(error)
