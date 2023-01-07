@@ -65,13 +65,12 @@
 					<div class="p-r-10 p-r-0-sr991">
 						<!-- Blog Detail -->
 						<div class="p-b-70">
-							{{ poll.description }}
+              <span v-html="poll.description"></span>
 						</div>
 
             <div class="progress" v-if="votes_count">
               <div class="progress-bar" v-for="choice in choices" role="progressbar" v-bind:style="'width:' +choice.progress+'%; background-color: '+choice.color" v-bind:aria-valuenow="choice.progress" aria-valuemin="0" aria-valuemax="100">{{ choice.choice_text }}</div>
             </div>
-
 						<!-- Leave a comment -->
 						<div class="choices" v-if="$store.state.isAuthenticated && !my_vote">
 							<h4 class="f1-l-4 cl3 p-b-12">
@@ -128,18 +127,18 @@
 
                               <p>{{ vote.comment }}</p>
 
-                              <ul class="list-inline d-sm-flex my-0" style="justify-content: flex-end; display: none !important;">
+                              <ul class="list-inline d-sm-flex my-0" style="justify-content: flex-end;">
                                 <li class="list-inline-item">
-                                  <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                  <button class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" @click="postLike(vote.uid)">
                                     <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                                    178
-                                  </a>
+                                    {{ vote.get_total_likes }}
+                                  </button>
                                 </li>
                                 <li class="list-inline-item">
-                                  <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                                  <button class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" @click="postDisLike(vote.uid)">
                                     <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-                                    34
-                                  </a>
+                                    {{ vote.get_total_dis_likes }}
+                                  </button>
                                 </li>
                               </ul>
                             </div>
@@ -251,7 +250,7 @@
                 choiceSelected: '',
                 comment: '',
                 votes: [],
-                my_vote: {},
+                my_vote: {'choice': ''},
                 votes_count: 0,
             }
         },
@@ -372,7 +371,12 @@
                 await axios
                     .get(`/api/v1/polls/${pollUID}/my-vote/`)
                     .then(response => {
-                        this.my_vote = response.data
+                        if(response.data.comment){
+                          this.my_vote = response.data
+                        }
+                        else{
+                          this.my_vote = null
+                        }
                     })
                     .catch(error => {
                         console.log(error)
@@ -390,6 +394,36 @@
                         $('.submit').fadeOut();
                         $('.choices').fadeOut();
                         this.getChoices();
+                        this.getVotes();
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.$store.commit('setIsLoading', false)
+            },
+            async postLike(comment_uid) {
+                this.$store.commit('setIsLoading', true)
+                const data = {
+                    uid: comment_uid
+                }
+                await axios
+                    .post(`/api/v1/likes/`, data)
+                    .then(response => {
+                        this.getVotes();
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                this.$store.commit('setIsLoading', false)
+            },
+            async postDisLike(comment_uid) {
+                this.$store.commit('setIsLoading', true)
+                const data = {
+                    uid: comment_uid
+                }
+                await axios
+                    .post(`/api/v1/dislikes/`, data)
+                    .then(response => {
                         this.getVotes();
                     })
                     .catch(error => {

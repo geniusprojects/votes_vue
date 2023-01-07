@@ -8,6 +8,7 @@ import Category from '../views/main/Category.vue'
 import Poll from '../views/main/Poll.vue'
 import LogIn from '../views/main/LogIn.vue'
 import SignUp from '../views/main/SignUp.vue'
+import AddPoll from '../views/main/AddPoll.vue'
 
 import CRMSignUp from '../views/SignUp.vue'
 import CRMLogIn from '../views/LogIn.vue'
@@ -50,6 +51,14 @@ const routes = [
     path: '/categories/:id',
     name: 'Category',
     component: Category
+  },
+  {
+    path: '/polls/add',
+    name: 'AddPoll',
+    component: AddPoll,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/crm',

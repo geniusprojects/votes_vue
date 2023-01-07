@@ -49,6 +49,7 @@
 
 <script>
     import axios from 'axios'
+    import { toast } from 'bulma-toast'
     export default {
         name: 'SignUp',
         data() {
@@ -88,7 +89,7 @@
                                 duration: 2000,
                                 position: 'bottom-right',
                             })
-                            this.$router.push('/log-in')
+                            this.$router.push('/login')
                         })
                         .catch(error => {
                             if (error.response) {

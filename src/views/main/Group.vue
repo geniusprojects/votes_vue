@@ -343,13 +343,12 @@
                 await axios
                     .get(`/api/v1/groups/${groupID}/polls/`)
                     .then(response => {
-                        this.polls = response.data
                         this.num_polls = response.data.count
                     })
                 await axios
-                    .get(`/api/v1/groups/${groupID}/?page=${this.currentPage}&search=${this.query}`)
+                    .get(`/api/v1/groups/${groupID}/polls/?page=${this.currentPage}&search=${this.query}`)
                     .then(response => {
-                        this.leads = response.data.results
+                        this.polls = response.data
                         if (response.data.next) {
                             this.showNextButton = true
                         }
