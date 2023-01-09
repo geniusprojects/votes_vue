@@ -17,6 +17,9 @@
 						<router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'SignUp',}">
                 Sign Up
             </router-link>
+            <router-link v-else :class="'left-topbar-item'" :to="{ name: 'AddPoll',}">
+                Add Poll
+            </router-link>
 
             <router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'LogIn',}">
                 Log in
@@ -26,7 +29,7 @@
             </button>
 					</div>
 
-					<div class="right-topbar">
+					<div class="right-topbar" hidden>
 						<a href="#">
 							<span class="fab fa-facebook-f"></span>
 						</a>

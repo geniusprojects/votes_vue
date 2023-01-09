@@ -1646,9 +1646,9 @@ a.breadcrumb-item:hover {
   left: 0;
   opacity: 0.5;
   background: rgba(0,0,0,0.5);
-  background: -moz-linear-gradient(bottom, rgba(5, 62, 0, 0.38), rgba(0,0,0,0));
+  background: -moz-linear-gradient(bottom, rgba(5, 62, 0, 0.78), rgba(0,0,0,0));
   background: -o-linear-gradient(bottom, rgba(5, 62, 0, 0.38), rgba(0,0,0,0));
-  background: -moz-linear-gradient(bottom, rgba(5, 62, 0, 0.38), rgba(0,0,0,0));
+  background: -moz-linear-gradient(bottom, rgba(5, 62, 0, 0.78), rgba(0,0,0,0));
   background: linear-gradient(bottom, rgba(5, 62, 0, 0.38), rgba(0,0,0,0));
 }
 
@@ -1829,7 +1829,7 @@ a.breadcrumb-item:hover {
 .wrap-pic-w, .wrap-pic-max-w,
 .wrap-pic-h, .wrap-pic-max-h {display: block;}
 
-.wrap-pic-w > img {width: 100%;}
+.wrap-pic-w > img {width: 100%; max-height: 150px; object-fit: cover;}
 .wrap-pic-max-w > img {max-width: 100%;}
 
 .wrap-pic-h > img {height: 100%;}

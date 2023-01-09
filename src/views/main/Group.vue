@@ -103,7 +103,7 @@
 	</section>
 
 	<!-- Post -->
-	<section class="bg0 p-t-70 p-b-55">
+	<section id="polls" class="bg0 p-t-70 p-b-55">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-10 col-lg-8 p-b-80">
@@ -143,8 +143,8 @@
 
 					<!-- Pagination -->
 					<div class="flex-wr-s-c m-rl--7 p-t-15">
-						<a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">1</a>
-						<a href="#" class="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">2</a>
+            <button class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
+            <button class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5" @click="goToNextPage()" v-if="showNextButton">Next</button>
 					</div>
 				</div>
 
@@ -317,10 +317,14 @@
             goToNextPage() {
                 this.currentPage += 1
                 this.getPolls()
+                var getPolls = document.getElementById("polls");
+                getPolls.scrollIntoView({behavior: 'smooth'}, true);
             },
             goToPreviousPage() {
                 this.currentPage -= 1
                 this.getPolls()
+                var getPolls = document.getElementById("polls");
+                getPolls.scrollIntoView({behavior: 'smooth'}, true);
             },
             async getGroup() {
                 this.$store.commit('setIsLoading', true)
@@ -348,7 +352,7 @@
                 await axios
                     .get(`/api/v1/groups/${groupID}/polls/?page=${this.currentPage}&search=${this.query}`)
                     .then(response => {
-                        this.polls = response.data
+                        this.polls = response.data.results
                         if (response.data.next) {
                             this.showNextButton = true
                         }
