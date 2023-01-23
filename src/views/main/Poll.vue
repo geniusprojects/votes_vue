@@ -51,9 +51,9 @@
 						{{ poll.votes_count }} Votes
 					</span>
 
-					<a href="" class="f1-s-3 cl8 m-rl-7 txt-center hov-cl10 trans-03">
-						0 Comment
-					</a>
+<!--					<a href="" class="f1-s-3 cl8 m-rl-7 txt-center hov-cl10 trans-03">-->
+<!--						{{ poll.votes_count }} Comment-->
+<!--					</a>-->
 				</div>
 			</div>
 		</div>
