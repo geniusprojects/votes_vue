@@ -28,7 +28,7 @@
           <div class="col-md-6 col-lg-6 p-b-80">
             <div class="p-r-10 p-r-0-sr991">
               <form @submit.prevent="submitForm">
-                <input type="email" name="email" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="username" placeholder="Email*">
+                <input type="email" name="email" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="email" placeholder="Email*">
                 <input type="password" name="password1" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="password1" placeholder="Password*">
                 <input type="password" name="password2" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="password2" placeholder="Confirm Password*">
                 <div class="notification is-danger" v-if="errors.length">
@@ -55,6 +55,7 @@
         data() {
             return {
                 username: '',
+                email: '',
                 password1: '',
                 password2: '',
                 errors: []
@@ -63,8 +64,8 @@
         methods: {
             async submitForm() {
                 this.errors = []
-                if (this.username === '') {
-                    this.errors.push('The username is missing')
+                if (this.email === '') {
+                    this.errors.push('The email is missing')
                 }
                 if (this.password1 === '') {
                     this.errors.push('The password is too short')
@@ -75,7 +76,8 @@
                 if (!this.errors.length) {
                     this.$store.commit('setIsLoading', true)
                     const formData = {
-                        username: this.username,
+                        username: this.email,
+                        email: this.email,
                         password: this.password1
                     }
                     await axios

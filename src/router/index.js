@@ -8,6 +8,7 @@ import Category from '../views/main/Category.vue'
 import Poll from '../views/main/Poll.vue'
 import LogIn from '../views/main/LogIn.vue'
 import SignUp from '../views/main/SignUp.vue'
+import AccountActivation from '../views/main/AccountActivation.vue'
 import AddPoll from '../views/main/AddPoll.vue'
 
 import CRMSignUp from '../views/SignUp.vue'
@@ -79,6 +80,11 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/activate/:uid/:token',
+    name: 'AccountActivation',
+    component: AccountActivation
   },
   {
     path: '/login',

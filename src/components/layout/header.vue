@@ -9,7 +9,7 @@
 			<div class="wrap-logo container no-banner">
 				<!-- Logo desktop -->
 				<div class="logo">
-					<img src="/frontend/images/voteps.png" alt="LOGO">
+					<a href="/"><img src="/frontend/images/voteps.png" alt="LOGO"></a>
 				</div>
 
 				<!-- Banner -->

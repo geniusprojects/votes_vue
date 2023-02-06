@@ -2,7 +2,7 @@
 			<div class="topbar">
 				<div class="content-topbar container h-100">
 					<div class="left-topbar">
-						<span class="left-topbar-item flex-wr-s-c">
+						<span class="left-topbar-item flex-wr-s-c" style="display: none;">
 							<span>
 								New York, NY
 							</span>

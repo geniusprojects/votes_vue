@@ -28,7 +28,7 @@
           <div class="col-md-6 col-lg-6 p-b-80">
             <div class="p-r-10 p-r-0-sr991">
               <form @submit.prevent="submitForm">
-                <input type="email" name="email" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="username" placeholder="Email*">
+                <input type="email" name="email" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="email" placeholder="Email*">
                 <input type="password" name="password" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="password" placeholder="Password*">
                 <div class="notification is-danger" v-if="errors.length">
                     <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
@@ -54,6 +54,7 @@
             return {
                 username: '',
                 password: '',
+                email: '',
                 errors: []
             }
         },
@@ -63,7 +64,8 @@
                 axios.defaults.headers.common['Authorization'] = ''
                 localStorage.removeItem('token')
                 const formData = {
-                    username: this.username,
+                    username: this.email,
+                    email: this.email,
                     password: this.password
                 }
                 await axios
@@ -92,6 +94,9 @@
                         this.$router.push('/')
                     })
                     .catch(error => {
+                        for (const property in error.response.data) {
+                            this.errors.push(`${error.response.data[property]}`)
+                        }
                         console.log(error)
                     })
 
