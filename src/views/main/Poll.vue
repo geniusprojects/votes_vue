@@ -68,7 +68,7 @@
               <span v-html="poll.description"></span>
 						</div>
 
-            <div class="progress" v-if="votes_count">
+            <div class="progress" v-if="votes_count && my_vote">
               <div class="progress-bar" v-for="choice in choices" role="progressbar" v-bind:style="'width:' +choice.progress+'%; background-color: '+choice.color" v-bind:aria-valuenow="choice.progress" aria-valuemin="0" aria-valuemax="100">{{ choice.choice_text }}</div>
             </div>
 						<!-- Leave a comment -->
@@ -235,6 +235,7 @@
   .media-comment {
       margin-top:20px
   }
+  .justify-content-center img{max-width: 720px;}
 </style>
 
 <script>
@@ -374,6 +375,10 @@
                         if(response.data.comment){
                           this.my_vote = response.data
                         }
+                        if(response.data.choice){
+                          this.my_vote = response.data
+                          $('.choices').fadeOut();
+                        }
                         else{
                           this.my_vote = null
                         }
@@ -395,6 +400,7 @@
                         $('.choices').fadeOut();
                         this.getChoices();
                         this.getVotes();
+                        this.getMyVote();
                     })
                     .catch(error => {
                         console.log(error)
