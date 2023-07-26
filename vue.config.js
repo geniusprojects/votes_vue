@@ -3,6 +3,12 @@ module.exports = defineConfig({
   transpileDependencies: true,
   pages: {
     index: {
+      entry: 'src/apps/Shop/main.js',
+      template: 'public/Shop/index.html',
+      title: 'Index Page',
+      chunks: ['chunk-vendors', 'chunk-common', 'index']
+    },
+    polls: {
       entry: 'src/apps/index/main.js',
       template: 'public/index.html',
       //filename: 'crm.html',
