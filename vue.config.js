@@ -8,7 +8,7 @@ module.exports = defineConfig({
       title: 'Index Page',
       chunks: ['chunk-vendors', 'chunk-common', 'index']
     },
-    polls: {
+    shop: {
       entry: 'src/apps/Shop/main.js',
       template: 'public/Shop/index.html',
       //filename: 'crm.html',
