@@ -1,6 +1,9 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
+  devServer: {
+    disableHostCheck: true,
+  },
   pages: {
     index: {
       entry: 'src/apps/index/main.js',
