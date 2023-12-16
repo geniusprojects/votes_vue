@@ -6,6 +6,6 @@ import axios from 'axios'
 import CKEditor from '@ckeditor/ckeditor5-vue'
 import '@ckeditor/ckeditor5-build-classic/build/translations/ru'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000'
+axios.defaults.baseURL = 'http://api.zoteps.ru'
 
 createApp(App).use(store).use(router, axios).use(CKEditor).mount('#app')
