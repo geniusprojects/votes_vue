@@ -7,7 +7,10 @@ export default createStore({
     token: '',
     user: {
       id: 0,
-      username: ''
+      username: '',
+      is_author: false,
+      is_verify: false,
+      is_promo: false,
     },
     team: {
       id: 0,
@@ -24,6 +27,9 @@ export default createStore({
         state.isAuthenticated = true
         state.user.username = localStorage.getItem('username')
         state.user.id = localStorage.getItem('userid')
+        //state.user.is_author = localStorage.getItem('is_author')
+        //state.user.is_verify = localStorage.getItem('is_verify')
+        //state.user.is_promo = localStorage.getItem('is_promo')
         state.team.name = localStorage.getItem('team_name')
         state.team.id = localStorage.getItem('team_id')
         state.team.plan = localStorage.getItem('team_plan')
@@ -34,6 +40,9 @@ export default createStore({
         state.isAuthenticated = false
         state.user.id = 0
         state.user.username = ''
+        state.user.is_author = false
+        state.user.is_verify = false
+        state.user.is_promo = false
         state.team.id = 0
         state.team.name = ''
         state.team.plan = ''

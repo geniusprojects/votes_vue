@@ -88,9 +88,32 @@
                 await axios
                     .get('/api/v1/users/me')
                     .then(response => {
-                        this.$store.commit('setUser', {'id': response.data.id, 'username': response.data.username})
+                        let is_author = false;
+                        let is_verify = false;
+                        let is_promo = false;
+                        for(let i=0;i<response.data.groups.length;i++){
+                          if(response.data.groups[i]['name'] == 'Author'){
+                            is_author = true;
+                          }
+                          else if(response.data.groups[i]['name'] == 'Verify'){
+                            is_verify = true;
+                          }
+                          else if(response.data.groups[i]['name'] == 'Promo'){
+                            is_promo = true;
+                          }
+                        }
+                        this.$store.commit('setUser', {
+                          'id': response.data.id,
+                          'username': response.data.username,
+                          'is_author': is_author,
+                          'is_verify': is_verify,
+                          'is_promo': is_promo,
+                        })
                         localStorage.setItem('username', response.data.username)
                         localStorage.setItem('userid', response.data.id)
+                        //localStorage.setItem('is_author', is_author)
+                        //localStorage.setItem('is_verify', is_verify)
+                        //localStorage.setItem('is_promo', is_promo)
                         this.$router.push('/')
                     })
                     .catch(error => {
