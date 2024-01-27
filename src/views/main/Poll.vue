@@ -72,9 +72,9 @@
               <div class="progress-bar" v-for="choice in choices" role="progressbar" v-bind:style="'width:' +choice.progress+'%; background-color: '+choice.color" v-bind:aria-valuenow="choice.progress" aria-valuemin="0" aria-valuemax="100">{{ choice.choice_text }}</div>
             </div>
 						<!-- Leave a comment -->
-						<div class="choices" v-if="$store.state.isAuthenticated && !my_vote">
+						<div class="choices" v-if="$store.state.isAuthenticated && !my_vote && $store.state.user.is_verify">
 							<h4 class="f1-l-4 cl3 p-b-12">
-								Choose an Option
+								Выбери вариант
 							</h4>
 
 							<!--<p class="f1-s-13 cl8 p-b-40">
@@ -95,26 +95,26 @@
 
 
 							<form @submit.prevent="postVote">
-								<textarea class="comment bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="comment" v-model="comment" placeholder="Comment..." style="display: none;"></textarea>
+								<textarea class="comment bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="comment" v-model="comment" placeholder="Комментарий..." style="display: none;"></textarea>
 
 								<button class="submit size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10" style="display: none;">
-									Vote
+									Отправить
 								</button>
 							</form>
 						</div>
             <div v-else-if="$store.state.isAuthenticated && my_vote">
               <p class="f1-s-13 cl8 p-b-40">
-                You have already voted. Your choice was "<span v-bind:style="'color:' +my_vote.choice.color">{{ my_vote.choice.choice_text }}</span>"
+                От тебя уже есть голос. Твой выбор: "<span v-bind:style="'color:' +my_vote.choice.color">{{ my_vote.choice.choice_text }}</span>"
 							</p>
             </div>
             <div v-else>
               <p class="f1-s-13 cl8 p-b-40">
-                You must be <router-link :to="{ name: 'LogIn',}">logged</router-link> in to be able to vote.
+                Чтобы проголосовать тебе надо пройти <router-link :to="{ name: 'LogIn',}">верификацию</router-link>!
 							</p>
             </div>
             <div class="comments" style="margin-top: 30px;" v-if="votes.length > 0">
                 <h4 class="f1-l-4 cl3 p-b-12">
-                  Comments
+                  Комментарии
                 </h4>
                 <div class="row">
                     <div class="col-md-12" v-for="vote in votes">

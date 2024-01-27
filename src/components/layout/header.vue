@@ -9,7 +9,8 @@
 			<div class="wrap-logo container no-banner">
 				<!-- Logo desktop -->
 				<div class="logo">
-					<a href="/"><img src="/frontend/images/voteps.png" alt="LOGO"></a>
+          <a href="/"><h1 style="font-family: 'custom'; font-size: 96px; color: #15A752;">OprosNaRu</h1></a>
+					<!--<a href="/"><img src="/frontend/images/voteps.png" alt="LOGO"></a>-->
 				</div>
 
 				<!-- Banner -->

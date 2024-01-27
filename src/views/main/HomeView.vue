@@ -265,7 +265,7 @@
 							<ul class="p-t-35">
 								<li class="flex-wr-sb-s p-b-22" v-for="(poll, index) in popular_polls">
 									<div class="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-										{{ index + 1 }}
+                    {{ poll.votes_count }}
 									</div>
 
                   <router-link :class="'size-w-3 f1-s-7 cl3 hov-cl10 trans-03'" :to="{ name: 'Poll', params: { id: poll.uid }}">

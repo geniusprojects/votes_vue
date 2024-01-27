@@ -36,7 +36,7 @@
                 </div>
 
                 <button class="size-a-20 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-20">
-                  Sign Up
+                  Зарегистрироваться
                 </button>
               </form>
             </div>

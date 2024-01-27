@@ -17,7 +17,7 @@
 						<router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'SignUp',}">
                 Sign Up
             </router-link>
-            <router-link v-else-if="$store.state.user.is_author" :class="'left-topbar-item'" :to="{ name: 'AddPoll',}">
+            <router-link v-else-if="$store.state.user.is_author || $store.state.user.is_promo" :class="'left-topbar-item'" :to="{ name: 'AddPoll',}">
                 Add Poll
             </router-link>
 
@@ -206,6 +206,7 @@
                 localStorage.removeItem('token')
                 localStorage.removeItem('username')
                 localStorage.removeItem('userid')
+                localStorage.removeItem('cols')
                 //localStorage.removeItem('is_author')
                 //localStorage.removeItem('is_verify')
                 //localStorage.removeItem('is_promo')

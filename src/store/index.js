@@ -27,6 +27,17 @@ export default createStore({
         state.isAuthenticated = true
         state.user.username = localStorage.getItem('username')
         state.user.id = localStorage.getItem('userid')
+        if(localStorage.getItem('cols')){
+          if(localStorage.getItem('cols')[0] + localStorage.getItem('cols').slice(-1) == '55'){
+            state.user.is_verify = true
+          }
+          if(localStorage.getItem('cols')[0] + localStorage.getItem('cols').slice(-1) == '33'){
+            state.user.is_author = true
+          }
+          if(localStorage.getItem('cols')[0] + localStorage.getItem('cols').slice(-1) == '77'){
+            state.user.is_promo = true
+          }
+        }
         //state.user.is_author = localStorage.getItem('is_author')
         //state.user.is_verify = localStorage.getItem('is_verify')
         //state.user.is_promo = localStorage.getItem('is_promo')

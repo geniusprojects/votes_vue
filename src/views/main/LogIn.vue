@@ -35,7 +35,7 @@
                 </div>
 
                 <button class="size-a-20 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-20">
-                  Send
+                  Войти
                 </button>
               </form>
             </div>
@@ -91,15 +91,19 @@
                         let is_author = false;
                         let is_verify = false;
                         let is_promo = false;
+                        let perm = '11';
                         for(let i=0;i<response.data.groups.length;i++){
                           if(response.data.groups[i]['name'] == 'Author'){
                             is_author = true;
+                            perm = '33';
                           }
                           else if(response.data.groups[i]['name'] == 'Verify'){
                             is_verify = true;
+                            perm = '55';
                           }
                           else if(response.data.groups[i]['name'] == 'Promo'){
                             is_promo = true;
+                            perm = '77';
                           }
                         }
                         this.$store.commit('setUser', {
@@ -111,6 +115,7 @@
                         })
                         localStorage.setItem('username', response.data.username)
                         localStorage.setItem('userid', response.data.id)
+                        localStorage.setItem('cols', perm[0] + Math.random() + perm[1])
                         //localStorage.setItem('is_author', is_author)
                         //localStorage.setItem('is_verify', is_verify)
                         //localStorage.setItem('is_promo', is_promo)
