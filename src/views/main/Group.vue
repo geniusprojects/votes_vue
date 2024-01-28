@@ -332,7 +332,8 @@
                 await axios
                     .get(`/api/v1/groups/${groupID}/`)
                     .then(response => {
-                        this.group = response.data
+                        this.group = response.data;
+                        document.title = this.group.title
                     })
                     .catch(error => {
                         console.log(error)

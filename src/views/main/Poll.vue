@@ -326,7 +326,8 @@
                 await axios
                     .get(`/api/v1/polls/${pollUID}/`)
                     .then(response => {
-                        this.poll = response.data
+                        this.poll = response.data;
+                        document.title = this.poll.title + ' | OprosNaRu'
                     })
                     .catch(error => {
                         console.log(error)

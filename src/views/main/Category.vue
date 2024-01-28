@@ -332,7 +332,8 @@
                 await axios
                     .get(`/api/v1/categories/${categoryID}/`)
                     .then(response => {
-                        this.category = response.data
+                        this.category = response.data;
+                        document.title = this.category.title
                     })
                     .catch(error => {
                         console.log(error)

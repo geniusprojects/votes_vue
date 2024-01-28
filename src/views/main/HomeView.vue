@@ -477,7 +477,7 @@ export default {
       this.getGroup(),
       this.getLatestPolls(),
       this.getPopularPolls(),
-      document.title = 'new title'
+      document.title = 'OprosNaRu'
   },
   methods: {
       formatDate(dateString) {

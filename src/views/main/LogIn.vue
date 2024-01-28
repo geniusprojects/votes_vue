@@ -48,6 +48,7 @@
 
 <script>
     import axios from 'axios'
+    document.title = 'Авторизация | OprosNaRu';
     export default {
         name: 'LogIn',
         data() {

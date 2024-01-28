@@ -50,6 +50,7 @@
 <script>
     import axios from 'axios'
     import { toast } from 'bulma-toast'
+    document.title = 'Регистрация | OprosNaRu';
     export default {
         name: 'SignUp',
         data() {
