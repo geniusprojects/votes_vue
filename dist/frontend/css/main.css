@@ -68,6 +68,11 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   src: url('../fonts/Lato/Lato-Regular.ttf'); 
 }
 
+@font-face {
+  font-family: custom;
+  src: url('../fonts/10451.ttf');
+}
+
 
 /*//////////////////////////////////////////////////////////////////
 [ RS PLUGIN ]*/
