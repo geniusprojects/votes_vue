@@ -3,12 +3,11 @@
     <div class="container">
       <div class="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
         <div class="f2-s-1 p-r-30 m-tb-6">
-          <a href="index.html" class="breadcrumb-item f1-s-3 cl9">
-            Home
-          </a>
+
+          <router-link :class="'breadcrumb-item f1-s-3 cl9'" :to="{ name: 'mHomeView'}" style="padding: 3px;"><i class="fa fa-home"></i></router-link>
 
           <span class="breadcrumb-item f1-s-3 cl9">
-            Activate Account
+            Активация Аккаунта
           </span>
         </div>
       </div>
@@ -17,7 +16,7 @@
     <!-- Page heading -->
     <div class="container p-t-4 p-b-40 text-center">
       <h2 class="f1-l-1 cl2">
-        Activate Account
+        Активация Аккаунта
       </h2>
     </div>
 
