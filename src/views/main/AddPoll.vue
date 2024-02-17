@@ -3,7 +3,7 @@
         <div class="columns is-multiline add_poll">
             <div class="container p-t-20 p-b-20 text-center">
               <h2 class="f1-l-1 cl2">
-                Add Poll
+                Создать опрос
               </h2>
             </div>
 
@@ -12,7 +12,7 @@
                   <form @submit.prevent="submitImage">
                     <input hidden class="p-rl-15" type="file" accept="image/jpeg" id="image_file" ref="file" @change="uploadImage">
                     <label style="margin: 20px auto; cursor: pointer; width:300px; text-align: center; padding: 8px 0;" for="image_file" class="size-a-20 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15">
-                      Upload Main Image  <i class="fa fa-cloud-upload-alt"></i>
+                      Загрузи основное изображение  <i class="fa fa-cloud-upload-alt"></i>
                     </label>
                     <img v-bind:src="previewImage" class="uploading-image" style="width:100%; margin-bottom: 20px;"/>
                   </form>
@@ -24,7 +24,7 @@
                       <div class="row">
                         <div class="col-md-6 ">
                           <select class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="selectedGroup" @change="getCategory()">
-                            <option disabled value="">Please select group</option>
+                            <option disabled value="">Выбери область</option>
                             <option
                                   v-for="group in groups"
                                   v-bind:key="group.id"
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-6 ">
                           <select style="display: none;" class="categories bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="selectedCategory">
-                            <option disabled value="">Please select category</option>
+                            <option disabled value="">Выбери категорию</option>
                             <option
                                   v-for="category in categories"
                                   v-bind:key="category.id"
@@ -53,7 +53,7 @@
                 </form>
 
                 <button class="size-a-20 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-b-20" @click="submit()">
-                  Add Poll
+                  Создать опрос
                 </button>
 
             </div>
@@ -61,31 +61,31 @@
         <div class="columns is-multiline add_choices" style="display: none;">
             <div class="container p-t-20 p-b-20 text-center">
               <h2 class="f1-l-1 cl2">
-                Add Choices
+                Добавить вариант
               </h2>
             </div>
 
             <div class="column is-12 text-center">
               <div class="row choice" v-for="(choice,k) in choices" :key="k">
-                <div class="col-md-8 p-r-0">
+                <div class="col-md-7 p-r-0">
                   <input type="text" name="choice_text" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" v-model="choice.choice_text" placeholder="Title*">
                 </div>
-                <div class="col-md-2 p-l-0 p-r-0">
+                <div class="col-md-1 p-l-0 p-r-0">
                   <input type="color" name="color" class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-0 m-b-20" v-model="choice.color">
                 </div>
-                <div class="col-md-1 p-l-1 p-r-1">
+                <div class="col-md-2 p-l-1 p-r-1">
                   <button class="size-a-19 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-18 m-b-20" @click="add_choice(k)" v-show="k || ( !k && choices.length > 0)">
-                    Add
+                    Добавить
                   </button>
                 </div>
-                <div class="col-md-1 p-l-1">
+                <div class="col-md-2 p-l-1">
                   <button class="size-a-19 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-18 m-b-20" @click="remove_choice(k)" v-show="k == choices.length-1">
-                    Delete
+                    Удалить
                   </button>
                 </div>
               </div>
               <button class="size-a-20 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-b-20" @click="save_choices()">
-                Save Choices
+                Сохранить варианты
               </button>
             </div>
         </div>

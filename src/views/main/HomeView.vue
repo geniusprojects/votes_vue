@@ -3,31 +3,15 @@
 	<div class="container">
 		<div class="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
 			<div class="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
-<!--				<span class="text-uppercase cl2 p-r-8">-->
-<!--					Trending Now:-->
-<!--				</span>-->
 
-<!--				<span class="dis-inline-block cl6 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">-->
-<!--					<span class="dis-inline-block slide100-txt-item animated visible-false">-->
-<!--						Interest rate angst trips up US equity bull market-->
-<!--					</span>-->
-
-<!--					<span class="dis-inline-block slide100-txt-item animated visible-false">-->
-<!--						Designer fashion show kicks off Variety Week-->
-<!--					</span>-->
-
-<!--					<span class="dis-inline-block slide100-txt-item animated visible-false">-->
-<!--						Microsoft quisque at ipsum vel orci eleifend ultrices-->
-<!--					</span>-->
-<!--				</span>-->
 			</div>
 
-			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search">
-				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-					<i class="zmdi zmdi-search"></i>
-				</button>
-			</div>
+<!--			<div class="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">-->
+<!--				<input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search">-->
+<!--				<button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">-->
+<!--					<i class="zmdi zmdi-search"></i>-->
+<!--				</button>-->
+<!--			</div>-->
 		</div>
 	</div>
 
@@ -146,10 +130,11 @@
 						<div class="tab01 p-b-20" v-for="(group, parent_index) in groups" v-bind:key="group.id">
 							<div class="tab01-head how2 how2-cl2 bocl12 flex-s-c m-r-10 m-r-0-sr991">
 								<!-- Brand tab -->
-								<h3 class="f1-m-2 cl13 tab01-title">
-                  {{ group.title }}
-								</h3>
-
+                <router-link :to="'/groups/' + group.id">
+                  <h3 class="f1-m-2 cl13 tab01-title">
+                    {{ group.title }}
+                  </h3>
+                </router-link>
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
 
@@ -169,10 +154,10 @@
 								</ul>
 
 								<!--  -->
-                <router-link class="tab01-link f1-s-1 cl9 hov-cl10 trans-03" :to="'/groups/' + group.id">
-                    View all
-                    <i class="fs-12 m-l-5 fa fa-caret-right"></i>
-                </router-link>
+<!--                <router-link class="tab01-link f1-s-1 cl9 hov-cl10 trans-03" :to="'/groups/' + group.id">-->
+<!--                    Еще-->
+<!--                    <i class="fs-12 m-l-5 fa fa-caret-right"></i>-->
+<!--                </router-link>-->
 							</div>
 
 
@@ -258,7 +243,7 @@
 						<div>
 							<div class="how2 how2-cl3 flex-s-c">
 								<h3 class="f1-m-2 cl3 tab01-title">
-									Most Popular
+									Популярное
 								</h3>
 							</div>
 
@@ -474,10 +459,13 @@ export default {
       }
   },
   mounted() {
-      this.getGroup(),
-      this.getLatestPolls(),
-      this.getPopularPolls(),
+      this.getGroup()
+      this.getLatestPolls()
+      this.getPopularPolls()
       document.title = 'OprosNaRu'
+      let Scripts = document.createElement('script')
+      Scripts.setAttribute('src', '/frontend/js/main.js')
+      document.body.appendChild(Scripts)
   },
   methods: {
       formatDate(dateString) {

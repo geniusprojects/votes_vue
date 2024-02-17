@@ -4,27 +4,7 @@
 
     /*==================================================================
     [ Load page ]*/
-    try {
-        $(".animsition").animsition({
-            inClass: 'fade-in',
-            outClass: 'fade-out',
-            inDuration: 1500,
-            outDuration: 800,
-            linkElement: '.animsition-link',
-            loading: true,
-            loadingParentElement: 'html',
-            loadingClass: 'animsition-loading-1',
-            loadingInner: '<div class="loader05"></div>',
-            timeout: true,
-            timeoutCountdown: 6000,
-            onLoadEvent: false,
-            browser: [ 'animation-duration', '-webkit-animation-duration'],
-            overlay : false,
-            overlayClass : 'animsition-overlay-slide',
-            overlayParentElement : 'body',
-            transition: function(url){ window.location.href = url; }
-        });
-    } catch(er) {console.log(er);}
+
 
 setTimeout(function() {
     /*==================================================================
@@ -260,5 +240,5 @@ setTimeout(function() {
         console.log(er);
     }
 
-}, 1500);
+}, 500);
 })(jQuery);

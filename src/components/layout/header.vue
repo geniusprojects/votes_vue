@@ -9,7 +9,7 @@
 			<div class="wrap-logo container no-banner">
 				<!-- Logo desktop -->
 				<div class="logo">
-          <a href="/"><h1 style="font-family: 'custom'; font-size: 96px; color: #15A752;">OprosNaRu</h1></a>
+          <router-link :to="{ name: 'mHomeView'}"><h1 style="font-family: 'custom'; font-size: 96px; color: #15A752;">OprosNaRu</h1></router-link>
 					<!--<a href="/"><img src="/frontend/images/voteps.png" alt="LOGO"></a>-->
 				</div>
 
@@ -24,9 +24,7 @@
 				<div class="main-nav">
 					<!-- Menu desktop -->
 					<nav class="menu-desktop">
-						<a class="logo-stick" href="index.html">
-							<img src="/frontend/images/icons/voteps.png" alt="LOGO">
-						</a>
+            <router-link :class="'logo-stick'" :to="{ name: 'mHomeView'}"><h1 style="font-family: 'custom'; font-size: 36px; color: #15A752;">OprosNaRu</h1></router-link>
 
 						<ul class="main-menu justify-content-center">
 
@@ -76,6 +74,12 @@
 									</div>
 								</div>
 							</li>
+              <li style="position: absolute; right: 0; padding: 10px 0 10px 0;">
+                <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search" style="border: 1px #c3e6cb  solid; border-radius: 5px;">
+                <button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
+                  <i class="zmdi zmdi-search"></i>
+                </button>
+              </li>
 
 						</ul>
 					</nav>
