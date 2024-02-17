@@ -2,31 +2,20 @@
 			<div class="topbar">
 				<div class="content-topbar container h-100">
 					<div class="left-topbar">
-						<span class="left-topbar-item flex-wr-s-c" style="display: none;">
-							<span>
-								New York, NY
-							</span>
-
-							<img class="m-b-1 m-rl-8" src="images/icons/icon-night.png" alt="IMG">
-
-							<span>
-								HI 58° LO 56°
-							</span>
-						</span>
-
-						<router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'SignUp',}">
-                Sign Up
-            </router-link>
-            <router-link v-else-if="$store.state.user.is_author || $store.state.user.is_promo" :class="'left-topbar-item'" :to="{ name: 'AddPoll',}">
-                Add Poll
-            </router-link>
 
             <router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'LogIn',}">
-                Log in
+                <i class="fa fa-user"></i>
             </router-link>
-            <button v-else :class="'left-topbar-item'" @click="logout()">
-                Log out
-            </button>
+            <a href="#" v-else :class="'left-topbar-item'" @click="logout()">
+                <i class="fa fa-sign-out-alt"></i>
+            </a>
+
+            <router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'SignUp',}">
+                <i class="fa fa-sign-in-alt"></i>
+            </router-link>
+            <router-link v-else-if="$store.state.user.is_author || $store.state.user.is_promo" :class="'left-topbar-item'" :to="{ name: 'AddPoll',}">
+                <i class="far fa-plus-square" title="Добавить опрос"></i>
+            </router-link>
 					</div>
 
 					<div class="right-topbar" hidden>
@@ -57,7 +46,7 @@
 			<div class="wrap-header-mobile">
 				<!-- Logo moblie -->
 				<div class="logo-mobile">
-					<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+					<a href="/"><h1 style="font-family: 'custom'; font-size: 36px; color: #15A752;">OprosNaRu</h1></a>
 				</div>
 
 				<!-- Button show menu -->
@@ -71,62 +60,48 @@
 			<!-- Menu Mobile -->
 			<div class="menu-mobile">
 				<ul class="topbar-mobile">
-					<li class="left-topbar">
-						<span class="left-topbar-item flex-wr-s-c">
-							<span>
-								New York, NY
-							</span>
-
-							<img class="m-b-1 m-rl-8" src="images/icons/icon-night.png" alt="IMG">
-
-							<span>
-								HI 58° LO 56°
-							</span>
-						</span>
-					</li>
 
 					<li class="left-topbar">
-						<a href="#" class="left-topbar-item">
-							About
-						</a>
+						<router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'LogIn',}">
+                <i class="fa fa-user"></i>
+            </router-link>
+            <a href="#" v-else :class="'left-topbar-item'" @click="logout()">
+                <i class="fa fa-sign-out-alt"></i>
+            </a>
 
-						<a href="#" class="left-topbar-item">
-							Contact
-						</a>
-
-						<a href="#" class="left-topbar-item">
-							Sing up
-						</a>
-
-						<a href="#" class="left-topbar-item">
-							Log in
-						</a>
+            <router-link v-if="!$store.state.isAuthenticated" :class="'left-topbar-item'" :to="{ name: 'SignUp',}">
+                <i class="fa fa-sign-in-alt"></i>
+            </router-link>
+            <router-link v-else-if="$store.state.user.is_author || $store.state.user.is_promo" :class="'left-topbar-item'" :to="{ name: 'AddPoll',}">
+                <i class="far fa-plus-square" title="Добавить опрос"></i>
+            </router-link>
 					</li>
 
 					<li class="right-topbar">
-						<a href="#">
-							<span class="fab fa-facebook-f"></span>
-						</a>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-facebook-f"></span>-->
+<!--						</a>-->
 
-						<a href="#">
-							<span class="fab fa-twitter"></span>
-						</a>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-twitter"></span>-->
+<!--						</a>-->
 
-						<a href="#">
-							<span class="fab fa-pinterest-p"></span>
-						</a>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-pinterest-p"></span>-->
+<!--						</a>-->
 
-						<a href="#">
-							<span class="fab fa-vimeo-v"></span>
-						</a>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-vimeo-v"></span>-->
+<!--						</a>-->
 
-						<a href="#">
-							<span class="fab fa-youtube"></span>
-						</a>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-youtube"></span>-->
+<!--						</a>-->
 					</li>
 				</ul>
 
 				<ul class="main-menu-m">
+
 					<li>
 						<a href="index.html">Home</a>
 						<ul class="sub-menu-m">

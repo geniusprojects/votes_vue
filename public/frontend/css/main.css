@@ -202,7 +202,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 .left-topbar-item {
   font-family: Roboto-Regular;
-  font-size: 12px;
+  font-size: 16px;
   color: #ccc;
   line-height: 1.8;
   padding: 0 13px;
@@ -217,17 +217,17 @@ a.left-topbar-item:hover {
   color: #17b978;
 }
 
-.left-topbar-item::before {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 1px;
-  height: 10px;
-  background-color: #fff;
-  opacity: 0.1;
-  left: 0;
-  top: calc(50% - 5px);
-}
+/*.left-topbar-item::before {*/
+/*  content: "";*/
+/*  display: block;*/
+/*  position: absolute;*/
+/*  width: 1px;*/
+/*  height: 10px;*/
+/*  background-color: #fff;*/
+/*  opacity: 0.1;*/
+/*  left: 0;*/
+/*  top: calc(50% - 5px);*/
+/*}*/
 
 .left-topbar-item:first-child:before {
   display: none;
