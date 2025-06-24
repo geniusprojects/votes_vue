@@ -6,8 +6,8 @@
 
         <router-link :class="'breadcrumb-item f1-s-3 cl9'" :to="{ name: 'mHomeView'}" style="padding: 3px;"><i class="fa fa-home"></i></router-link>
 
-				<router-link :class="'breadcrumb-item f1-s-3 cl9'" :to="{ name: 'Category', params: { id: poll.category }}">
-            {{ poll.category }}
+				<router-link :class="'breadcrumb-item f1-s-3 cl9'" :to="{ name: 'Category', params: { id: poll.category.id }}">
+            {{ poll.category.title }}
         </router-link>
         <span class="breadcrumb-item f1-s-3 cl9">
 					 {{ poll.title }}
@@ -21,8 +21,8 @@
 		<!-- Title -->
 		<div class="bg-img1 size-a-18 how-overlay1" v-bind:style="'background-image: url('+(poll.main_image ? poll.main_image.path : '/frontend/images/voteps_no_img.png')+');'">
 			<div class="container h-full flex-col-e-c p-b-58">
-        <router-link :class="'f1-s-10 cl0 hov-cl10 trans-03 text-uppercase txt-center m-b-33'" :to="{ name: 'Category', params: { id: poll.category }}">
-            {{ poll.category }}
+        <router-link :class="'f1-s-10 cl0 hov-cl10 trans-03 text-uppercase txt-center m-b-33'" :to="{ name: 'Category', params: { id: poll.category.id }}">
+            {{ poll.category.title }}
         </router-link>
 
 				<h3 class="f1-l-5 cl0 p-b-16 txt-center respon2">
@@ -104,7 +104,7 @@
             </div>
             <div v-else>
               <p class="f1-s-13 cl8 p-b-40">
-                Чтобы проголосовать тебе надо пройти <router-link :to="{ name: 'LogIn',}">верификацию</router-link>!
+                Чтобы проголосовать, тебе надо пройти <router-link :to="{ name: 'LogIn',}">верификацию</router-link>!
 							</p>
             </div>
             <div class="comments" style="margin-top: 30px;" v-if="votes.length > 0">

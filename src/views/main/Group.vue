@@ -299,6 +299,16 @@
             this.getPolls(),
             this.getPopularPolls()
         },
+        watch: {
+          '$route.params.id': {
+            immediate: true,
+            handler(newId) {
+              this.getGroup(newId);
+              this.getPolls(newId);
+              this.getPopularPolls(newId);
+            }
+          }
+        },
         methods: {
             formatDate(dateString) {
                 const date = new Date(dateString);

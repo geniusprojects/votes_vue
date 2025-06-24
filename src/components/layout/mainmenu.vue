@@ -18,26 +18,33 @@
             </router-link>
 					</div>
 
-					<div class="right-topbar" hidden>
-						<a href="#">
-							<span class="fab fa-facebook-f"></span>
-						</a>
+					<div class="right-topbar">
 
-						<a href="#">
-							<span class="fab fa-twitter"></span>
-						</a>
+            <div style="position: relative; padding: 10px 0 10px 0;">
+              <input class="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search" placeholder="Search" style="border: 1px #c3e6cb  solid; border-radius: 5px;">
+              <button class="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
+                <i class="zmdi zmdi-search"></i>
+              </button>
+            </div>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-facebook-f"></span>-->
+<!--						</a>-->
 
-						<a href="#">
-							<span class="fab fa-pinterest-p"></span>
-						</a>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-twitter"></span>-->
+<!--						</a>-->
 
-						<a href="#">
-							<span class="fab fa-vimeo-v"></span>
-						</a>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-pinterest-p"></span>-->
+<!--						</a>-->
 
-						<a href="#">
-							<span class="fab fa-youtube"></span>
-						</a>
+<!--						<a href="#">-->
+<!--							<span class="fab fa-vimeo-v"></span>-->
+<!--						</a>-->
+
+<!--						<a href="#">-->
+<!--							<span class="fab fa-youtube"></span>-->
+<!--						</a>-->
 					</div>
 				</div>
 			</div>

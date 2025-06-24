@@ -282,7 +282,7 @@ a.left-topbar-item:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 125px;
+  height: 180px;
   padding-top: 25px;
   padding-bottom: 10px;
 }
@@ -421,6 +421,7 @@ a.left-topbar-item:hover {
   -o-transition: all 0.3s;
   -moz-transition: all 0.3s;
   -webkit-transition: all 0.3s;
+  text-align: center;
 }
 
 .main-menu > li > a::before {
@@ -1149,7 +1150,7 @@ a.breadcrumb-item:hover {
 .cl5 {color: #555;}
 .cl6 {color: #666;}
 .cl7 {color: #777;}
-.cl8 {color: #888;}
+.cl8 {color: #ccc;}
 .cl9 {color: #999;}
 .cl10 {color: #17b978;}
 .cl11 {color: #ccc;}
